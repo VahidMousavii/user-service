@@ -3,7 +3,6 @@ package io.devotel.soap;
 import io.devotel.soap.objects.GetUserByIdRequest;
 import io.devotel.soap.objects.GetUserByIdResponse;
 import io.devotel.soap.objects.User;
-import io.devotel.user.dto.UserDTO;
 import io.devotel.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -23,10 +22,9 @@ public class UserEndpoint {
         @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getUserByIdRequest")
         @ResponsePayload
         public GetUserByIdResponse getUserById(@RequestPayload GetUserByIdRequest request) {
-            UserDTO user = userService.getUserById(request.getId());
             GetUserByIdResponse response = new GetUserByIdResponse();
             ModelMapper modelMapper = new ModelMapper();
-            response.setUser(modelMapper.map(user, User.class));
+            response.setUser(modelMapper.map(userService.getUserById(request.getId()).getData(), User.class));
             return response;
         }
     }
