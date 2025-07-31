@@ -3,7 +3,7 @@ package io.devotel.user.service;
 import io.devotel.common.GeneralResponseDto;
 import io.devotel.common.StaticStrings;
 import io.devotel.exceptions.UserNotFoundException;
-import io.devotel.user.dao.UserRepository;
+import io.devotel.user.repository.UserRepository;
 import io.devotel.user.dto.AddUserDTO;
 import io.devotel.user.dto.UserDTO;
 import io.devotel.user.entity.UserEntity;
