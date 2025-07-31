@@ -1,2 +1,2 @@
 # user-service
-User Service - a SOAP based project 
+This project is built using a microservice-style architecture, consisting of two independent services: User Service and Profile Service, communicating via SOAP and REST APIs.
