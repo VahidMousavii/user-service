@@ -6,4 +6,4 @@
 //
 
 @jakarta.xml.bind.annotation.XmlSchema(namespace = "http://devotel.io/userservice", elementFormDefault = jakarta.xml.bind.annotation.XmlNsForm.QUALIFIED)
-package io.devotel.objects;
+package io.devotel.soap.objects;
