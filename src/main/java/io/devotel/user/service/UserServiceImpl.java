@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public GeneralResponseDto<List<UserDTO>> getAllUsersResponse() {
+    public GeneralResponseDto<List<UserDTO>> getAllUsers() {
         try {
             List<UserDTO> users = userRepository.findAll()
                     .stream()
@@ -88,8 +88,12 @@ public class UserServiceImpl implements UserService {
                     .message(StaticStrings.SUCCESS_MESSAGE)
                     .data(userDTO)
                     .build();
+        } catch (UserNotFoundException ex) {
+            logger.warn("User not found: {}", ex.getMessage());
+            throw ex;
         } catch (Exception ex) {
-            throw new UserNotFoundException(id, ex);
+            logger.error("Unexpected error in getUserById", ex);
+            throw ex;
         }
     }
 }

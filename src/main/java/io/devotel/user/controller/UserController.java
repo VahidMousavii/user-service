@@ -3,7 +3,7 @@ package io.devotel.user.controller;
 import io.devotel.common.GeneralResponseDto;
 import io.devotel.user.dto.AddUserDTO;
 import io.devotel.user.dto.UserDTO;
-import io.devotel.user.service.UserServiceImpl;
+import io.devotel.user.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,28 +14,28 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserServiceImpl userServiceImpl;
+    private final UserService userService;
 
-    public UserController(UserServiceImpl userServiceImpl) {
-        this.userServiceImpl = userServiceImpl;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @PostMapping("/add")
     public ResponseEntity<GeneralResponseDto<UserDTO>> addUser(@Valid @RequestBody AddUserDTO addUserDTO) {
         return ResponseEntity
                 .status(201)
-                .body(userServiceImpl.addUser(addUserDTO));
+                .body(userService.addUser(addUserDTO));
     }
 
     @GetMapping("{id}")
     public ResponseEntity<GeneralResponseDto<UserDTO>> getUserById(@PathVariable Long id) {
         return ResponseEntity
-                .ok(userServiceImpl.getUserById(id));
+                .ok(userService.getUserById(id));
     }
 
     @GetMapping
     public ResponseEntity<GeneralResponseDto<List<UserDTO>>> getAllUsers() {
         return ResponseEntity
-                .ok(userServiceImpl.getAllUsersResponse());
+                .ok(userService.getAllUsers());
     }
 }
