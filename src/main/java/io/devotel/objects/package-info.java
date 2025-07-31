@@ -5,5 +5,5 @@
 // Generated on: 2025.07.30 at 03:13:04 PM GMT+03:30 
 //
 
-@jakarta.xml.bind.annotation.XmlSchema(namespace = "http://example.com/userservice", elementFormDefault = jakarta.xml.bind.annotation.XmlNsForm.QUALIFIED)
+@jakarta.xml.bind.annotation.XmlSchema(namespace = "http://devotel.io/userservice", elementFormDefault = jakarta.xml.bind.annotation.XmlNsForm.QUALIFIED)
 package io.devotel.objects;
