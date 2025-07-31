@@ -13,13 +13,13 @@ Generated on: 2025.07.30 at 03:13:04 PM GMT+03:30
       <package name="com.example.userservice"/>
     </schemaBindings>
     <bindings scd="tns:getUserByIdRequest">
-      <class ref="io.devotel.objects.GetUserByIdRequest"/>
+      <class ref="io.devotel.soap.objects.GetUserByIdRequest"/>
     </bindings>
     <bindings scd="tns:getUserByIdResponse">
-      <class ref="io.devotel.objects.GetUserByIdResponse"/>
+      <class ref="io.devotel.soap.objects.GetUserByIdResponse"/>
     </bindings>
     <bindings scd="~tns:User">
-      <class ref="io.devotel.objects.User"/>
+      <class ref="io.devotel.soap.objects.User"/>
     </bindings>
   </bindings>
 </bindings>

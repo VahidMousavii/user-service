@@ -6,7 +6,7 @@
 //
 
 
-package io.devotel.objects;
+package io.devotel.soap.objects;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
