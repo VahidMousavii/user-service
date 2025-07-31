@@ -12,5 +12,5 @@ public interface UserService {
 
     GeneralResponseDto<UserDTO> getUserById(Long id);
 
-    GeneralResponseDto<List<UserDTO>> getAllUsersResponse();
+    GeneralResponseDto<List<UserDTO>> getAllUsers();
 }
