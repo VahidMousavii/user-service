@@ -48,8 +48,9 @@ As expected, the implemented SOAP API can be tested directly using tools like So
 Although I initially planned to dockerize the services for production, I wasn’t able to complete it due to time constraints.
 However, if you'd like to run the project locally, it can easily be done via IntelliJ IDEA or the terminal using the following Maven command:  "mvn spring-boot:run"
 
-Also, for convenience during development and testing, I’ve configured the PostgreSQL to accept all incoming connections — so you shouldn’t encounter any database access issues.
+Also, for convenience, I’ve configured the PostgreSQL to accept all incoming connections — so you shouldn’t encounter any database access issues.
 
+Thank you for your consideration.
 
 ### 📦 Prerequisites
 - Java 21+ : https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html
