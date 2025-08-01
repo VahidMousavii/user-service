@@ -34,28 +34,30 @@ This repository contains one of two Spring Boot microservices designed to showca
 ## 🚀 Running the Services
 
 I have deployed both services on a VPS and successfully launched the JAR files on the server.
-PostgreSQL has also been installed and properly configured for database persistence.
+PostgreSQL has also been installed and properly configured for database persistence on the server.
 
 You can access the Swagger UI of the project here:
 🔗 http://37.32.26.21:9090/swagger-ui/index.html
 
 Additionally, the WSDL file for the SOAP API is available at:
 🔗 http://37.32.26.21:9090/ws/userService.wsdl
-(Note: The base URL is configurable.)
+(Note: The base URL is configurable in app.properties)
 
 As expected, the implemented SOAP API can be tested directly using tools like SoapUI with the URL above.
 
 Although I initially planned to dockerize the services for production, I wasn’t able to complete it due to time constraints.
+
+## 🚀 Running the Project Locally
 However, if you'd like to run the project locally, it can easily be done via IntelliJ IDEA or the terminal using the following Maven command:  "mvn spring-boot:run"
-
-Also, for convenience, I’ve configured the PostgreSQL to accept all incoming connections — so you shouldn’t encounter any database access issues.
-
-Thank you for your consideration.
+Also, for convenience, I’ve configured the PostgreSQL to accept all incoming connections — so you shouldn’t encounter any database access issues when running on **PROD** environment **locally**.
 
 ### 📦 Prerequisites
 - Java 21+ : https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html
 - Maven 3.8+  : https://maven.apache.org/download.cgi
 - PostgreSQL  : https://www.postgresql.org/download/
 - -Soap-UI for SOAP Test: https://www.soapui.org/downloads/soapui/
+- IntelliJ IDEA : https://www.jetbrains.com/idea/download/
+  
+Thank you for your consideration.
 
 ---
