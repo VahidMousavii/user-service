@@ -3,14 +3,13 @@ package io.devotel.user.service;
 import io.devotel.common.GeneralResponseDto;
 import io.devotel.common.StaticStrings;
 import io.devotel.exceptions.UserNotFoundException;
-import io.devotel.user.repository.UserRepository;
 import io.devotel.user.dto.AddUserDTO;
 import io.devotel.user.dto.UserDTO;
 import io.devotel.user.entity.UserEntity;
+import io.devotel.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +19,9 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserServiceImpl implements UserService {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
@@ -40,7 +39,7 @@ public class UserServiceImpl implements UserService {
                     .build();
 
         } catch (Exception ex) {
-            logger.error("Failed to save user to database", ex);
+            log.error("Failed to save user to database", ex);
 
             return GeneralResponseDto.<UserDTO>builder()
                     .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
@@ -66,7 +65,7 @@ public class UserServiceImpl implements UserService {
                     .build();
 
         } catch (Exception ex) {
-            logger.error("Failed to fetch all users from database", ex);
+            log.error("Failed to fetch all users from database", ex);
 
             return GeneralResponseDto.<List<UserDTO>>builder()
                     .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
@@ -89,10 +88,10 @@ public class UserServiceImpl implements UserService {
                     .data(userDTO)
                     .build();
         } catch (UserNotFoundException ex) {
-            logger.warn("User not found: {}", ex.getMessage());
+            log.warn("User not found: {}", ex.getMessage());
             throw ex;
         } catch (Exception ex) {
-            logger.error("Unexpected error in getUserById", ex);
+            log.error("Unexpected error in getUserById", ex);
             throw ex;
         }
     }
