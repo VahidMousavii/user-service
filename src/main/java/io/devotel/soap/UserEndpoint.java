@@ -15,16 +15,16 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 @Endpoint
 public class UserEndpoint {
 
-        private static final String NAMESPACE_URI = "http://devotel.io/userservice";
+    private static final String NAMESPACE_URI = "http://devotel.io/userservice";
 
-         private final UserService userService;
+    private final UserService userService;
 
-        @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getUserByIdRequest")
-        @ResponsePayload
-        public GetUserByIdResponse getUserById(@RequestPayload GetUserByIdRequest request) {
-            GetUserByIdResponse response = new GetUserByIdResponse();
-            ModelMapper modelMapper = new ModelMapper();
-            response.setUser(modelMapper.map(userService.getUserById(request.getId()).getData(), User.class));
-            return response;
-        }
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getUserByIdRequest")
+    @ResponsePayload
+    public GetUserByIdResponse getUserById(@RequestPayload GetUserByIdRequest request) {
+        GetUserByIdResponse response = new GetUserByIdResponse();
+        ModelMapper modelMapper = new ModelMapper();
+        response.setUser(modelMapper.map(userService.getUserById(request.getId()), User.class));
+        return response;
     }
+}
