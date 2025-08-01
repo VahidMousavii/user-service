@@ -51,13 +51,13 @@ Although I initially planned to dockerize the services for production, I wasn’
 However, if you'd like to run the project locally, it can easily be done via IntelliJ IDEA or the terminal using the following Maven command:  "mvn spring-boot:run"
 Also, for convenience, I’ve configured the PostgreSQL to accept all incoming connections — so you shouldn’t encounter any database access issues when running on **PROD** environment **locally**.
 
+I appreciate the chance to demonstrate my skills through this project.
+Thank you for your consideration.
+
 ### 📦 Prerequisites
 - Java 21+ : https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html
 - Maven 3.8+  : https://maven.apache.org/download.cgi
 - PostgreSQL  : https://www.postgresql.org/download/
 - -Soap-UI for SOAP Test: https://www.soapui.org/downloads/soapui/
 - IntelliJ IDEA : https://www.jetbrains.com/idea/download/
-  
-Thank you for your consideration.
 
----
