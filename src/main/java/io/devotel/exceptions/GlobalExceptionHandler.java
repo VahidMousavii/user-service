@@ -45,12 +45,11 @@ public class GlobalExceptionHandler {
     public ResponseEntity<GeneralResponseDto<String>> handleUserNotFoundException(UserNotFoundException ex) {
         log.error("User not found: {}", ex.getMessage(), ex);
 
-        GeneralResponseDto<String> response = new GeneralResponseDto<>(
-                HttpStatus.NOT_FOUND.value(),
-                ex.getMessage(),
-                null
-        );
-
+        GeneralResponseDto<String> response = GeneralResponseDto.<String>builder()
+                .code(HttpStatus.NOT_FOUND.value())
+                .message(ex.getMessage())
+                .data(null)
+                .build();
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
 
