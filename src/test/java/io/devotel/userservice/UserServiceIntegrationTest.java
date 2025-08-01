@@ -1,3 +1,4 @@
+
 package io.devotel.userservice;
 
 import io.devotel.user.dto.AddUserDTO;
@@ -28,7 +29,7 @@ class UserServiceIntegrationTest {
     @Test
     void testAddUser_shouldPersistToDatabase() {
 
-        AddUserDTO dto = new AddUserDTO("Test User", "test@example.com");
+        AddUserDTO dto = new AddUserDTO("Test User", "testTest@example.com");
 
         UserDTO savedUser = userService.addUser(dto);
 
@@ -39,3 +40,4 @@ class UserServiceIntegrationTest {
         assertEquals("test@example.com", fromDb.get().getEmail());
     }
 }
+
