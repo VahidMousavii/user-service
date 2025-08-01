@@ -13,7 +13,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,72 +26,46 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public GeneralResponseDto<UserDTO> addUser(AddUserDTO addUserDTO) {
-        try {
-            UserEntity userEntity = modelMapper.map(addUserDTO, UserEntity.class);
-            UserEntity savedEntity = userRepository.save(userEntity);
-            UserDTO savedDTO = modelMapper.map(savedEntity, UserDTO.class);
-
             return GeneralResponseDto.<UserDTO>builder()
                     .code(HttpStatus.CREATED.value())
                     .message(StaticStrings.SUCCESS_MESSAGE)
-                    .data(savedDTO)
+                    .data(modelMapper.map(userRepository.save(modelMapper.map(addUserDTO, UserEntity.class)), UserDTO.class))
                     .build();
-
-        } catch (Exception ex) {
-            log.error("Failed to save user to database", ex);
-
-            return GeneralResponseDto.<UserDTO>builder()
-                    .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                    .message("An unexpected error occurred while saving user.")
-                    .data(null)
-                    .build();
-        }
     }
 
 
     @Override
     public GeneralResponseDto<List<UserDTO>> getAllUsers() {
-        try {
-            List<UserDTO> users = userRepository.findAll()
-                    .stream()
-                    .map(user -> modelMapper.map(user, UserDTO.class))
-                    .collect(Collectors.toList());
+        List<UserDTO> users = findAllUsers();
+        return GeneralResponseDto.<List<UserDTO>>builder()
+                .code(HttpStatus.OK.value())
+                .message(StaticStrings.SUCCESS_MESSAGE)
+                .data(users)
+                .build();
+    }
 
-            return GeneralResponseDto.<List<UserDTO>>builder()
-                    .code(HttpStatus.OK.value())
-                    .message(StaticStrings.SUCCESS_MESSAGE)
-                    .data(users)
-                    .build();
-
-        } catch (Exception ex) {
-            log.error("Failed to fetch all users from database", ex);
-
-            return GeneralResponseDto.<List<UserDTO>>builder()
-                    .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                    .message("An unexpected error occurred while retrieving users.")
-                    .data(Collections.emptyList())
-                    .build();
-        }
+    private List<UserDTO> findAllUsers() {
+        List<UserDTO> users = userRepository.findAll()
+                .stream()
+                .map(user -> modelMapper.map(user, UserDTO.class))
+                .collect(Collectors.toList());
+        return users;
     }
 
 
     @Override
     public GeneralResponseDto<UserDTO> getUserById(Long id) {
-        try {
-            UserEntity userEntity = userRepository.findById(id)
-                    .orElseThrow(() -> new UserNotFoundException(id));
-            UserDTO userDTO = modelMapper.map(userEntity, UserDTO.class);
-            return GeneralResponseDto.<UserDTO>builder()
-                    .code(HttpStatus.OK.value())
-                    .message(StaticStrings.SUCCESS_MESSAGE)
-                    .data(userDTO)
-                    .build();
-        } catch (UserNotFoundException ex) {
-            log.warn("User not found: {}", ex.getMessage());
-            throw ex;
-        } catch (Exception ex) {
-            log.error("Unexpected error in getUserById", ex);
-            throw ex;
-        }
+        UserDTO userDTO = modelMapper.map(fetchUserEntity(id), UserDTO.class);
+        return GeneralResponseDto.<UserDTO>builder()
+                .code(HttpStatus.OK.value())
+                .message(StaticStrings.SUCCESS_MESSAGE)
+                .data(userDTO)
+                .build();
+    }
+
+    private UserEntity fetchUserEntity(Long id) {
+        UserEntity userEntity = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
+        return userEntity;
     }
 }
