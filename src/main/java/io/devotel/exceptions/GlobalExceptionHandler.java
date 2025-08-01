@@ -1,8 +1,7 @@
 package io.devotel.exceptions;
 
 import io.devotel.common.GeneralResponseDto;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -10,14 +9,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
+@Slf4j
 public class GlobalExceptionHandler {
-
-    private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
-
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<GeneralResponseDto<String>> handleUnexpectedException(Exception ex) {
-        logger.error("Unhandled exception occurred", ex);
+        log.error("Unhandled exception occurred", ex);
 
         GeneralResponseDto<String> response = GeneralResponseDto.<String>builder()
                 .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
@@ -46,7 +43,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<GeneralResponseDto<String>> handleUserNotFoundException(UserNotFoundException ex) {
-        logger.error("User not found: {}", ex.getMessage(), ex);
+        log.error("User not found: {}", ex.getMessage(), ex);
 
         GeneralResponseDto<String> response = new GeneralResponseDto<>(
                 HttpStatus.NOT_FOUND.value(),
